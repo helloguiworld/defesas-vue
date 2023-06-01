@@ -1,12 +1,18 @@
 <template>
   <section id="defenses-list">
-    <p>lista</p>
+    <p>lista ({{ defenses.length }})</p>
+    <defense-card v-for="defense in defenses" :key="defense.Ordem" :defense="defense" />
   </section>
 </template>
 
 <script>
-export default {
+import DefenseCard from './DefenseCard.vue';
 
+export default {
+  props: ['defenses'],
+  components: {
+    DefenseCard,
+  }
 }
 </script>
 
