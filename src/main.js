@@ -20,6 +20,28 @@ Vue.component('app-header', AppHeader)
 Vue.component('search-and-filters', SearchAndFilters)
 Vue.component('defenses-list', DefensesList)
 
+export const defenseSwitchesMixin = {
+  methods: {
+    switchCurso: function (curso) {
+      switch (curso) {
+        case "ME":
+          return "Mestrado";
+        case "DO":
+          return "Doutorado";
+        case "Mestrado":
+          return "ME";
+        case "Doutorado":
+          return "DO";
+        default:
+          return "Curso não identificado";
+      }
+    },
+  },
+}
+
+Vue.mixin(defenseSwitchesMixin)
+
 new Vue({
+  // mixins: [switchesMixin],
   render: h => h(App),
 }).$mount('#app')

@@ -1,22 +1,20 @@
 <template>
   <div class="radio-button">
-    <input type="radio" :id="id" :value="value" />
-    <label :for="id">{{ value }}</label>
+    <input type="radio" :name="name" :id="id" :value="value" :checked="checked" @click="$emit('click', value)"/>
+    <label :for="id">{{ label ? label : value }}</label>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['id', 'value']
+  props: ['name', 'id', 'value', 'label', 'checked']
 }
 </script>
 
 <style>
 .radio-button {
-  /* background-color: palegoldenrod; */
   font-size: 13px;
   display: flex;
-  /* align-items: center; */
   gap: 3px;
 }
 </style>

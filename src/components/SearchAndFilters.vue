@@ -17,28 +17,28 @@
       <p class="card-title">Filtrar por:</p>
 
       <div class="card-section">
-        <p class="card-subtitle">Nome</p>
-        <app-text-input placeholder="Ex.: Alana..." />
+        <p class="card-subtitle">Nome ({{ nome ? nome.toLowerCase() : '*' }})</p>
+        <app-text-input placeholder="Ex.: Alana..." :value="nome" @input="$emit('set-nome', $event)"/>
       </div>
 
       <div class="card-section">
-        <p class="card-title">Curso</p>
+        <p class="card-subtitle">Curso ({{ curso }})</p>
         <div class="card-line">
-            <app-radio-button id="curso-todos" value="Todos"/>
-            <app-radio-button id="curso-mestrado" value="Mestrado"/>
-            <app-radio-button id="curso-doutorado" value="Doutorado"/>
+          <app-radio-button name="curso" id="curso-todos" value="Todos" checked=true @click="$emit('set-curso', $event)" />
+          <app-radio-button name="curso" id="curso-mestrado" value="ME" label="Mestrado" @click="$emit('set-curso', $event)" />
+          <app-radio-button name="curso" id="curso-doutorado" value="DO" label="Doutorado" @click="$emit('set-curso', $event)" />
         </div>
       </div>
 
       <div class="card-section">
-        <p class="card-title">Programa</p>
+        <p class="card-subtitle">Programa ({{ programa }})</p>
         <div class="card-line">
-            <app-radio-button id="programa-todos" value="Todos"/>
-            <app-radio-button id="programa-mat" value="MAT"/>
-            <app-radio-button id="programa-ccmc" value="CCMC"/>
-            <app-radio-button id="programa-profmat" value="PROFMAT"/>
-            <app-radio-button id="programa-pipges" value="PIPGEs"/>
-            <app-radio-button id="programa-mecai" value="MECAI"/>
+          <app-radio-button name="programa" id="programa-todos" value="Todos" checked=true @click="$emit('set-programa', $event)" />
+          <app-radio-button name="programa" id="programa-mat" value="MAT" @click="$emit('set-programa', $event)" />
+          <app-radio-button name="programa" id="programa-ccmc" value="CCMC" @click="$emit('set-programa', $event)" />
+          <app-radio-button name="programa" id="programa-profmat" value="PROFMAT" @click="$emit('set-programa', $event)" />
+          <app-radio-button name="programa" id="programa-pipges" value="PIPGEs" @click="$emit('set-programa', $event)" />
+          <app-radio-button name="programa" id="programa-mecai" value="MECAI" @click="$emit('set-programa', $event)" />
         </div>
       </div>
     </card-base>
@@ -47,13 +47,14 @@
 
 <script>
 export default {
-
+  props: ['nome', 'curso', 'programa'],
 }
 </script>
 
 <style>
 #search-and-filters {
   /* border: solid 2px green; */
+
   flex: 1;
   overflow-y: auto;
   max-width: 350px;

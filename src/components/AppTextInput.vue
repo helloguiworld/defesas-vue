@@ -1,10 +1,10 @@
 <template>
-  <input class="app-text-input" :placeholder="placeholder ? placeholder : 'Digite aqui...'" />
+  <input class="app-text-input" :placeholder="placeholder ? placeholder : 'Digite aqui...'" :value="value" @input="$emit('input', $event.target.value)"/>
 </template>
 
 <script>
 export default {
-  props: ['placeholder']
+  props: ['placeholder', 'value']
 }
 </script>
 
