@@ -16,12 +16,18 @@ export default {
 .card {
   padding: 15px;
   background-color: #D7DCE3;
+  border: solid 1px transparent;
   border-radius: 10px;
   box-shadow: 0 2px 20px #1e1e1e10;
+  transition: .3s;
 
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.card:hover {
+  border-color: #647B98;
 }
 
 .card-title {

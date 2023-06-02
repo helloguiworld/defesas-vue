@@ -28,10 +28,14 @@ export const defenseSwitchesMixin = {
           return "Mestrado";
         case "DO":
           return "Doutorado";
+        case "DD":
+          return "Doutorado D.";
         case "Mestrado":
           return "ME";
         case "Doutorado":
           return "DO";
+        case "Todos":
+          return "Todos";
         default:
           return "Curso não identificado";
       }

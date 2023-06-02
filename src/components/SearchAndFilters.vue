@@ -4,11 +4,11 @@
     <card-base>
       <p class="card-title">Ordenar por:</p>
       <div class="card-line">
-        <app-button>Ordem</app-button>
-        <app-button>Nome</app-button>
-        <app-button>Data</app-button>
-        <app-button>Curso</app-button>
-        <app-button>Programa</app-button>
+        <!-- v-for orders -->
+        <app-button v-for="item in orders" :key="item" :class="order == item ? 'selected' : ''"
+          @click="$emit('set-order', item)">
+          {{ item }}
+        </app-button>
       </div>
     </card-base>
 
@@ -18,27 +18,25 @@
 
       <div class="card-section">
         <p class="card-subtitle">Nome ({{ nome ? nome.toLowerCase() : '*' }})</p>
-        <app-text-input placeholder="Ex.: Alana..." :value="nome" @input="$emit('set-nome', $event)"/>
+        <app-text-input placeholder="Ex.: Alana..." :value="nome" @input="$emit('set-nome', $event)" />
       </div>
 
       <div class="card-section">
         <p class="card-subtitle">Curso ({{ curso }})</p>
         <div class="card-line">
-          <app-radio-button name="curso" id="curso-todos" value="Todos" checked=true @click="$emit('set-curso', $event)" />
-          <app-radio-button name="curso" id="curso-mestrado" value="ME" label="Mestrado" @click="$emit('set-curso', $event)" />
-          <app-radio-button name="curso" id="curso-doutorado" value="DO" label="Doutorado" @click="$emit('set-curso', $event)" />
+          <!-- v-for cursos -->
+          <app-radio-button v-for="item in cursos" :key="item" name="curso" :id="`curso-${item.toLowerCase()}`"
+            :value="item" :label="switchCurso(item)" :checked="item == 'Todos' ? true : false"
+            @click="$emit('set-curso', $event)" />
         </div>
       </div>
 
       <div class="card-section">
         <p class="card-subtitle">Programa ({{ programa }})</p>
         <div class="card-line">
-          <app-radio-button name="programa" id="programa-todos" value="Todos" checked=true @click="$emit('set-programa', $event)" />
-          <app-radio-button name="programa" id="programa-mat" value="MAT" @click="$emit('set-programa', $event)" />
-          <app-radio-button name="programa" id="programa-ccmc" value="CCMC" @click="$emit('set-programa', $event)" />
-          <app-radio-button name="programa" id="programa-profmat" value="PROFMAT" @click="$emit('set-programa', $event)" />
-          <app-radio-button name="programa" id="programa-pipges" value="PIPGEs" @click="$emit('set-programa', $event)" />
-          <app-radio-button name="programa" id="programa-mecai" value="MECAI" @click="$emit('set-programa', $event)" />
+          <!-- v-for programas -->
+          <app-radio-button v-for="item in programas" :key="item" name="programa" :id="`programa-${item.toLowerCase()}`"
+            :value="item" :checked="item == 'Todos' ? true : false" @click="$emit('set-programa', $event)" />
         </div>
       </div>
     </card-base>
@@ -47,7 +45,14 @@
 
 <script>
 export default {
-  props: ['nome', 'curso', 'programa'],
+  props: ['order', 'nome', 'curso', 'programa'],
+  data() {
+    return {
+      orders: ['Ordem', 'Nome', 'Data', 'Curso', 'Programa'],
+      cursos: ['Todos', 'ME', 'DO', 'DD'],
+      programas: ['Todos', 'MAT', 'CCMC', 'PROFMAT', 'PIPGEs', 'MECAI'],
+    }
+  },
 }
 </script>
 

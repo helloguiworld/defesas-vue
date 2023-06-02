@@ -1,14 +1,12 @@
 <template>
-  <button type="button" class="app-button">
-    <p>
-      <slot>Botão</slot>
-    </p>
+  <button type="button" class="app-button" @click="$emit('click', $event)">
+    <slot>{{ value ? value : "Botão" }}</slot>
   </button>
 </template>
 
 <script>
 export default {
-
+  
 }
 </script>
 
@@ -26,5 +24,10 @@ export default {
 .app-button:hover {
   background-color: #DDE5F1;
   border-color: #B8C3D4;
+}
+
+.app-button.selected {
+  background-color: #647B98;
+  color: #DDE5F1;
 }
 </style>

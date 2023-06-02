@@ -3,15 +3,17 @@
     <app-header />
 
     <main>
-      <search-and-filters :nome="nome" @set-nome="setNome" :curso="curso" @set-curso="setCurso" :programa="programa"
-        @set-programa="setPrograma" />
+      <search-and-filters :order="order" @set-order="setOrder" :nome="nome" @set-nome="setNome" :curso="curso"
+        @set-curso="setCurso" :programa="programa" @set-programa="setPrograma" />
 
-      <defenses-list :defenses="filteredDefenses" />
+      <defenses-list :defenses="processedDefenses" />
     </main>
   </div>
 </template>
 
 <script>
+import compare from './functions/compare.js'
+
 export default {
   name: 'App',
   data() {
@@ -19,17 +21,36 @@ export default {
       defensesData: [],
       defenses: [],
       fetching: false,
+      order: "Ordem",
       nome: "",
       curso: "Todos",
       programa: "Todos",
     };
   },
   computed: {
-    filteredDefenses() {
-      return this.defenses
-        .filter(defense => defense?.Nome?.toLowerCase().match(this.nome.toLowerCase()))
-        .filter(defense => Number(defense?.Ordem) <= 10);
-    }
+    processedDefenses() {
+      let processedDefenses = this.defenses;
+
+      // FILTRO - Nome
+      // Easter egg quando filtra pelo nome "ades" rs
+      if (this.nome?.toLowerCase() == 'ades') {
+        processedDefenses = processedDefenses.filter(defense => defense?.Nome == "Adenilso da Silva Simão");
+        processedDefenses.forEach((defense, index) => {
+          processedDefenses[index].Nome = `${processedDefenses[index].Nome} 😁💙`;
+        });
+      } else if (this.nome) processedDefenses = processedDefenses.filter(defense => defense?.Nome?.toLowerCase().match(this.nome.toLowerCase()));
+      
+      // FILTRO - Curso
+      if (this.curso != "Todos") processedDefenses = processedDefenses.filter(defense => defense?.Curso == this.curso);
+      
+      // FILTRO - Programa
+      if (this.programa != "Todos") processedDefenses = processedDefenses.filter(defense => defense?.Programa == this.programa);
+      
+      // Ordenação
+      if (this.order != "Ordem") processedDefenses.sort((a, b) => compare(a[this.order], b[this.order]));
+
+      return processedDefenses;
+    },
   },
   methods: {
     async fetchDefenses() {
@@ -38,6 +59,8 @@ export default {
       await fetch(url)
         .then((data) => (data.json()))
         .then((response) => {
+          response?.items?.sort((a, b) => compare(a['Ordem'], b['Ordem']));
+
           this.defensesData = response;
           this.defenses = response?.items;
           console.log(response);
@@ -46,16 +69,16 @@ export default {
           this.fetching = false;
         });
     },
+    setOrder(value) {
+      this.order = value;
+    },
     setCurso(value) {
-      console.log("setCurso");
       this.curso = value;
     },
     setPrograma(value) {
-      console.log("setPrograma");
       this.programa = value;
     },
     setNome(value) {
-      console.log("setNome");
       this.nome = value;
     },
   },
