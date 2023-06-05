@@ -6,7 +6,7 @@
       <div class="card-line">
         <!-- v-for orders -->
         <app-button v-for="item in orders" :key="item" :class="order == item ? 'selected' : ''"
-          @click="$emit('set-order', item)">
+          @click="order != item ? $emit('set-order', item) : undefined">
           {{ item }}
         </app-button>
       </div>
@@ -27,7 +27,7 @@
           <!-- v-for cursos -->
           <app-radio-button v-for="item in cursos" :key="item" name="curso" :id="`curso-${item.toLowerCase()}`"
             :value="item" :label="switchCurso(item)" :checked="item == 'Todos' ? true : false"
-            @click="$emit('set-curso', $event)" />
+            @click="curso != item ? $emit('set-curso', $event) : undefined" />
         </div>
       </div>
 
@@ -36,7 +36,8 @@
         <div class="card-line">
           <!-- v-for programas -->
           <app-radio-button v-for="item in programas" :key="item" name="programa" :id="`programa-${item.toLowerCase()}`"
-            :value="item" :checked="item == 'Todos' ? true : false" @click="$emit('set-programa', $event)" />
+            :value="item" :checked="item == 'Todos' ? true : false"
+            @click="programa != item ? $emit('set-programa', $event) : undefined" />
         </div>
       </div>
     </card-base>
