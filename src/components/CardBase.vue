@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="$emit('click', $event)">
     <slot>
       <p class="title">card</p>
     </slot>
@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .card {
   padding: 15px;
   background-color: #D7DCE3;
@@ -24,35 +24,35 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
 
-.card:hover {
-  border-color: #647B98;
-}
+  &:hover {
+    border-color: #647B98;
+  }
 
-.card-title {
-  font-weight: 600;
-}
-
-.card-subtitle {
-  font-weight: 500;
-}
-
-.card-section {
-  /* border: solid 1px pink; */
-  background-color: #ECECEC;
-  font-size: 14px;
-  padding: 10px;
-  border-radius: 5px;
+  .card-title {
+    font-weight: 600;
+  }
   
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.card-line {
-  display: flex;
-  flex-flow: wrap;
-  gap: 10px;
+  .card-subtitle {
+    font-weight: 500;
+  }
+  
+  .card-section {
+    /* border: solid 1px pink; */
+    background-color: #ECECEC;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .card-line {
+    display: flex;
+    flex-flow: wrap;
+    gap: 10px;
+  }
 }
 </style>

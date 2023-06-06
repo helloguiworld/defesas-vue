@@ -1,5 +1,5 @@
 <template>
-  <card-base class="defense-card">
+  <card-base class="defense-card" @click="$emit('set-defense', defense)">
     <div class="card-data-flex-2">
       <p class="title"><strong>{{ defense.Nome }}</strong></p>
       <p><strong>Ordem:</strong> {{ defense.Ordem }}</p>
@@ -16,28 +16,29 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .defense-card {
+  cursor: pointer;
   font-size: 14px;
 
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
 
-.defense-card .card-data-flex-1{
-  flex: 1;
-}
+  .card-data-flex-1 {
+    flex: 1;
+  }
 
-.defense-card .card-data-flex-2{
-  flex: 2;
-}
+  .card-data-flex-2 {
+    flex: 2;
+  }
 
-.defense-card .title {
-  font-size: 15px;
-}
+  .title {
+    font-size: 15px;
+  }
 
-.defense-card strong {
-  font-weight: 500;
+  strong {
+    font-weight: 500;
+  }
 }
 </style>

@@ -8,17 +8,23 @@
       <search-and-filters :order="order" @set-order="setOrder" :nome="nome" @set-nome="setNome" :curso="curso"
         @set-curso="setCurso" :programa="programa" @set-programa="setPrograma" />
 
-      <defenses-list :defenses="processedDefenses" />
+      <defenses-list :defenses="defenses.slice(0, 10)" @set-defense="setDefensePopupData"/>
+
+      <defense-popup :defense="defensePopupData" :visibility="defensePopupVisibility" @set-visibility="setDefensePopupVisibility"/>
     </main>
   </div>
 </template>
 
 <script>
-import compare from './../functions/compare.js'
-import ISODate from './../functions/ISODate.js'
+import compare from '@/functions/compare.js'
+import ISODate from '@/functions/ISODate.js'
+import DefensePopup from '@/components/DefensePopup.vue';
 
 export default {
   name: 'DefensesView',
+  components: {
+    DefensePopup,
+  },
   data() {
     return {
       defensesData: [],
@@ -28,6 +34,8 @@ export default {
       nome: "",
       curso: "Todos",
       programa: "Todos",
+      defensePopupData: undefined,
+      defensePopupVisibility: false,
     };
   },
   computed: {
@@ -78,7 +86,6 @@ export default {
         .then((response) => {
           this.defensesData = response;
           this.defenses = response?.items;
-          console.log(response);
         })
         .finally(() => {
           this.fetching = false;
@@ -95,6 +102,15 @@ export default {
     },
     setNome(value) {
       this.nome = value;
+    },
+    setDefensePopupData(value) {
+      // console.log('setData', value);
+      this.defensePopupData = value;
+      this.setDefensePopupVisibility(true);
+    },
+    setDefensePopupVisibility(newVisibility) {
+      // console.log('setVisibility', newVisibility);
+      this.defensePopupVisibility = newVisibility;
     },
   },
   mounted() {

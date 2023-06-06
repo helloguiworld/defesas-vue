@@ -15,28 +15,28 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 footer {
   background-color: #A7B4C5;
   padding: 10px;
   box-shadow: 0 -2px 20px #1e1e1e10;
-  
+
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 5px 20px;
-}
 
-footer b {
-  font-weight: 500;
-}
+  b {
+    font-weight: 500;
+  }
 
-footer .title {
-  font-size: 14px;
-}
+  .title {
+    font-size: 14px;
+  }
 
-footer .subtitle {
-  font-size: 12px;
+  .subtitle {
+    font-size: 12px;
+  }
 }
 </style>

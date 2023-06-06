@@ -3,10 +3,11 @@
     <div class="defenses-list-header">
       <p class="defenses-list-title">Defesas</p>
 
-      <p>{{ defenses.length }} {{ defenses.length != 1 ? "itens" : "item"}}</p>
+      <p>{{ defenses.length }} {{ defenses.length != 1 ? "itens" : "item" }}</p>
     </div>
 
-    <defense-card v-for="defense in defenses" :key="defense.Ordem" :defense="defense" />
+    <defense-card v-for="defense in defenses" :key="defense.Ordem" :defense="defense"
+      @set-defense="$emit('set-defense', $event)" />
   </section>
 </template>
 
@@ -21,7 +22,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 #defenses-list {
   /* border: solid 2px blue; */
 
@@ -32,16 +33,18 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-.defenses-list-header {
-  /* background-color: pink; */
-  
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-.defenses-list-title {
-  font-size: 18px;
-  font-weight: 600;
+
+  .defenses-list-header {
+    /* background-color: pink; */
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .defenses-list-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
 }
 </style>
