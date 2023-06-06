@@ -8,7 +8,7 @@
       <search-and-filters :order="order" @set-order="setOrder" :nome="nome" @set-nome="setNome" :curso="curso"
         @set-curso="setCurso" :programa="programa" @set-programa="setPrograma" />
 
-      <defenses-list :defenses="defenses.slice(0, 10)" @set-defense="setDefensePopupData"/>
+      <defenses-list :defenses="processedDefenses" @set-defense="setDefensePopupData"/>
 
       <defense-popup :defense="defensePopupData" :visibility="defensePopupVisibility" @set-visibility="setDefensePopupVisibility"/>
     </main>
