@@ -1,8 +1,8 @@
 # defesas
 
 ## Grupo
-Guilherme Filipe Feitosa dos Santos - 11275092
-Marina Nastri da Costa Pereira Rodero - 10093702
+##### Guilherme Filipe Feitosa dos Santos - 11275092
+##### Marina Nastri da Costa Pereira Rodero - 10093702
 
 ## Project setup
 ```
